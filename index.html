@@ -17,24 +17,21 @@
 			}
 		</style>
 
-
-		<!-- Theme used for syntax highlighted code -->
-<!--		<link rel="stylesheet" href="plugin/highlight/monokai.css">-->
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/atom-one-dark.min.css" integrity="sha512-Jk4AqjWsdSzSWCSuQTfYRIF84Rq/eV0G2+tu07byYwHcbTGfdmLrHjUSwvzp5HvbiqK4ibmNwdcG49Y5RGYPTg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<!--		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/base16/material-palenight.min.css" integrity="sha512-Yn3mMZThz+r+6n46Zms4AJUEE6NyERa5Pf+wdlfrVCQJiGJBGE3hSj090SCPtMRO874z4MgqsbtCd20CEDBPBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />-->
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
 				<section>
-					<h2>Ruby</h2>
+					<h1>Ruby</h1>
+					<img class="r-stretch" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Ruby_logo.svg/1200px-Ruby_logo.svg.png" alt="ruby">
 					<h4>By Ethan Delany</h4>
 				</section>
 				<section>
-					<h2>Do you hate semicolons?</h2>
+					<h3>Do you hate semicolons?</h3>
 				</section>
 				<section>
-					<h2>What about squiggly brackets?</h2>
+					<h3>What about squiggly brackets?</h3>
 				</section>
 				<section>
 					<h2>Try Ruby!</h2>
@@ -733,7 +730,46 @@ end</code></pre>
 				</section>
 				<section>
 					<h3>Consider Yourself Introduced!</h3>
-					<h3 class="fragment">Now you're ready for Rails</h3>
+					<h3 class="fragment">Sieve of Eratosthenes Sidebar</h3>
+				</section>
+				<section>
+					<h3>Naive Way</h3>
+					<pre><code class="language-ruby">def sieve(max)
+  primes = (0..max).to_a
+
+  primes[0] = primes[1] = nil
+
+  counter = 0
+  primes.each do |p|
+    next unless p
+
+    break if p*p > max
+    counter += 1
+
+    (p*p).step(max,p) { |m| primes[m] = nil }
+  end
+
+  puts "Solved for #{max} in #{counter} steps."
+  primes.compact
+end
+
+def prime?(num)
+  sieve(num).include?(num)
+end
+
+puts prime?(105557)</code></pre>
+				</section>
+				<section>
+					<h3>Smart Way</h3>
+					<pre><code class="language-ruby">require 'prime'
+
+num = 105557
+primes = Prime::EratosthenesGenerator.new.take_while {|i| i <= num}
+
+primes.include?(num)</code></pre>
+				</section>
+				<section>
+					<h3>Now you're ready for Rails</h3>
 				</section>
 				<section>
 					<img class="r-stretch" src="https://i.imgur.com/0GitAzu.png" alt="files">
