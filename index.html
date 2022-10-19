@@ -1,0 +1,842 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Ethan Delany - Ruby Presentation</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jetbrains-mono@1.0.6/css/jetbrains-mono.min.css">
+
+		<style>
+			:root {
+				color-scheme: dark;
+			}
+		</style>
+
+
+		<!-- Theme used for syntax highlighted code -->
+<!--		<link rel="stylesheet" href="plugin/highlight/monokai.css">-->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/atom-one-dark.min.css" integrity="sha512-Jk4AqjWsdSzSWCSuQTfYRIF84Rq/eV0G2+tu07byYwHcbTGfdmLrHjUSwvzp5HvbiqK4ibmNwdcG49Y5RGYPTg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<!--		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.6.0/styles/base16/material-palenight.min.css" integrity="sha512-Yn3mMZThz+r+6n46Zms4AJUEE6NyERa5Pf+wdlfrVCQJiGJBGE3hSj090SCPtMRO874z4MgqsbtCd20CEDBPBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />-->
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h2>Ruby</h2>
+					<h4>By Ethan Delany</h4>
+				</section>
+				<section>
+					<h2>Do you hate semicolons?</h2>
+				</section>
+				<section>
+					<h2>What about squiggly brackets?</h2>
+				</section>
+				<section>
+					<h2>Try Ruby!</h2>
+					<h3>We have:</h3>
+				</section>
+				<section>
+					<p>no parentheses (sometimes)</p>
+					<pre>
+						<code class="language-ruby">
+							puts("gamer")
+							# or
+							puts "gamer"
+						</code>
+					</pre>
+				</section>
+				<section>
+					<p>implicit variable creation</p>
+					<pre><code class="language-ruby">
+						foo = "gamer"
+					</code></pre>
+				</section>
+				<section>
+					<p><code>do</code> and <code>end</code> (and closures!)</p>
+					<pre><code class="language-ruby">
+						[1, 2, 3].each do |n|
+							puts n
+						end
+					</code></pre>
+				</section>
+				<section>
+					<p>literal objects</p>
+					<pre><code class="language-ruby">
+						0.upto(15) do
+							puts "literal objects!"
+						end
+					</code></pre>
+				</section>
+				<section>
+					<p>non-alphanumeric characters in methods</p>
+					<pre><code class="language-ruby">
+						nil.nil? # true
+						[].empty? # true
+						foo.downcase! # modifies variable in place
+					</code></pre>
+				</section>
+				<section>
+					<p>no <code>new</code> keyword</p>
+					<pre><code class="language-ruby">
+						foo = Foo.new("hi")
+						# not new Foo("hi")
+					</code></pre>
+				</section>
+				<section>
+					<p><code>require</code> keyword</p>
+					<pre><code class="language-ruby">
+						require 'library1.rb'
+						require 'library2.rb'
+
+						libraryObj1 = LibraryClass1.new
+						libraryObj2 = LibraryClass2.new
+					</code></pre>
+				</section>
+				<section>
+					<p>no static type checking</p>
+					<pre><code class="language-ruby">
+						foo = "gamer"
+						bar = 5
+
+						puts(foo) # will run
+
+						puts(foo + bar) # will crash
+					</code></pre>
+				</section>
+				<section>
+					<p><code>nil</code> instead of <code>null</code></p>
+					<pre><code class="language-ruby">
+						nil.nil? # true
+						false.nil? #false
+					</code></pre>
+				</section>
+				<section>
+					<p>swapped <code>equals()</code> and <code>==</code></p>
+					<pre><code class="language-ruby">
+						foo == "gamer" # true
+						foo.equals("gamer") # false
+					</code></pre>
+				</section>
+				<section>
+					<h1>History of Ruby</h1>
+				</section>
+				<section>
+					<p>Let's go back to the year 1993</p>
+				</section>
+				<section>
+					<h4>This was C(++)</h4>
+					<pre><code class="language-cpp">#ifndef UNICODE
+#define UNICODE
+#endif
+
+#include <\windows.h>
+
+LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam);
+
+int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, PWSTR pCmdLine, int nCmdShow)
+{
+	// Register the window class.
+	const wchar_t CLASS_NAME[]  = L"Sample Window Class";
+
+	WNDCLASS wc = { };
+
+	wc.lpfnWndProc   = WindowProc;
+	wc.hInstance     = hInstance;
+	wc.lpszClassName = CLASS_NAME;
+
+	RegisterClass(&wc);
+
+	// Create the window.
+
+	HWND hwnd = CreateWindowEx(
+		0,                              // Optional window styles.
+		CLASS_NAME,                     // Window class
+		L"Learn to Program Windows",    // Window text
+		WS_OVERLAPPEDWINDOW,            // Window style
+
+		// Size and position
+		CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT, CW_USEDEFAULT,
+
+		NULL,       // Parent window
+		NULL,       // Menu
+		hInstance,  // Instance handle
+		NULL        // Additional application data
+		);
+
+	if (hwnd == NULL)
+	{
+		return 0;
+	}
+
+	ShowWindow(hwnd, nCmdShow);
+
+	// Run the message loop.
+
+	MSG msg = { };
+	while (GetMessage(&msg, NULL, 0, 0) > 0)
+	{
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+
+	return 0;
+}
+
+LRESULT CALLBACK WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
+{
+	switch (uMsg)
+	{
+	case WM_DESTROY:
+		PostQuitMessage(0);
+		return 0;
+
+	case WM_PAINT:
+		{
+			PAINTSTRUCT ps;
+			HDC hdc = BeginPaint(hwnd, &ps);
+
+			// All painting occurs here, between BeginPaint and EndPaint.
+
+			FillRect(hdc, &ps.rcPaint, (HBRUSH) (COLOR_WINDOW+1));
+
+			EndPaint(hwnd, &ps);
+		}
+		return 0;
+
+	}
+	return DefWindowProc(hwnd, uMsg, wParam, lParam);
+}</code></pre>
+				</section>
+				<section>
+					<h4>Java was still closed source</h4>
+					<img src="https://s.yimg.com/uu/api/res/1.2/8Bh2DoYPjGM8mOTDb6S1NQ--~B/aD0zODE7dz02MjA7YXBwaWQ9eXRhY2h5b24-/https://www.blogcdn.com/www.engadget.com/media/2012/10/javalogocross.png" alt="java">
+				</section>
+				<section>
+					<h4>Pascal</h4>
+					<pre><code class="language-pascal">program WriteName;
+VAR
+ Name:string;
+BEGIN
+ Write('Please give your name: ');
+ Readln(Name);
+ WriteLn('Hello ', Name);
+END.</code></pre>
+				</section>
+				<section>
+					<p>This guy comes along.</p>
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/Yukihiro_Matsumoto.JPG/220px-Yukihiro_Matsumoto.JPG" alt="matz">
+					<p>Yukihiro "Matz" Matsumoto</p>
+				</section>
+				<section>
+					<h4>Matz wanted a language perfect for his needs:</h4>
+					<ul>
+						<li class="fragment">Syntactically simple</li>
+						<li class="fragment">Truly object-oriented</li>
+						<li class="fragment">Having iterators and closures</li>
+						<li class="fragment">Exception handling</li>
+						<li class="fragment">Garbage collection</li>
+						<li class="fragment">Portable</li>
+					</ul>
+				</section>
+				<section>
+					<h4>Fast forward 12 years...</h4>
+				</section>
+				<section>
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Ruby_On_Rails_Logo.svg/1200px-Ruby_On_Rails_Logo.svg.png" alt="ror">
+				</section>
+				<section>
+					<img src="https://i.imgur.com/9vAHKTB.png" alt="tiobe">
+				</section>
+				<section>
+					<h3>Reasons to Like Rails</h3>
+					<ul>
+						<li class="fragment">Model-View-Controller</li>
+						<li class="fragment">Heavy usage of reflection</li>
+						<li class="fragment">Convention over Configuration</li>
+						<li class="fragment">Active Record (ORM)</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Rails is Used by Big Companies</h3>
+					<ul>
+						<li class="fragment">Twitter</li>
+						<li class="fragment">Etsy</li>
+						<li class="fragment">Shopify</li>
+						<li class="fragment">GitHub</li>
+						<li class="fragment">Airbnb</li>
+						<li class="fragment">Hulu</li>
+					</ul>
+				</section>
+				<section>
+					<h4>Problem Being</h4>
+					<h1 class="fragment">It's Slow</h1>
+				</section>
+				<section>
+					<img src="https://niklas-heer.github.io/speed-comparison/assets/2022-10-17T071516/combined_results.png" alt="ranking">
+				</section>
+				<section>
+					<h3>Miscellaneous Qualities</h3>
+				</section>
+				<section>
+					<h3>Language Classification</h3>
+					<p class="fragment">Object Oriented</p>
+				</section>
+				<section>
+					<h3>Compiled/Interpreted</h3>
+					<p class="fragment">Interpreted</p>
+					<p class="fragment">(hence how slow it is)</p>
+				</section>
+				<section>
+					<h3>Speed</h3>
+					<p class="fragment">Nope</p>
+					<p class="fragment">(as shown on the previous graph)</p>
+				</section>
+				<section>
+					<h3>Difficulty To Write</h3>
+					<p class="fragment">Not very</p>
+					<p class="fragment">Mostly English words</p>
+				</section>
+				<section>
+					<h3>Difficulty to Learn</h3>
+					<p class="fragment">Not very</p>
+				</section>
+				<section>
+					<h3>Memory Management</h3>
+					<p class="fragment">Garbage Collector</p>
+					<p class="fragment">And not a good one like Java :(</p>
+				</section>
+				<section>
+					<h3>Age of the Language</h3>
+					<p class="fragment">1993</p>
+					<p class="fragment">Pretty old, but not archaic</p>
+				</section>
+				<section>
+					<h3>Libraries</h3>
+					<ul>
+						<li class="fragment">Rails</li>
+					</ul>
+					<p class="fragment">That's about it</p>
+				</section>
+				<section>
+					<h3>Popularity</h3>
+					<p class="fragment">Okay, but definitely not great</p>
+				</section>
+				<section>
+					<h3>Top 10 Programming Languages</h3>
+					<img class="r-stretch" src="https://i.imgur.com/GVOjRR3.png" alt="graph">
+					<small><em>Data from the Stack Overflow 2022 Developer Survey</em></small>
+				</section>
+				<section>
+					<h3>Top 11-20 Programming Languages</h3>
+					<img class="r-stretch" src="https://i.imgur.com/lZi1OYl.png" alt="graph">
+					<small><em>Data from the Stack Overflow 2022 Developer Survey</em></small>
+				</section>
+				<section>
+					<h3>Reference Material</h3>
+					<a href="https://ruby-doc.org/">https://ruby-doc.org/</a>
+				</section>
+				<section>
+					<h3>Main Uses</h3>
+					<ul>
+						<li class="fragment">Web</li>
+						<li class="fragment">Scripts</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Unique Editors</h3>
+					<p class="fragment">None really</p>
+					<p class="fragment">LSP, RubyMine, VSC, etc.</p>
+				</section>
+				<section>
+					<h3>Platform Support (CRuby) (1/2)</h3>
+					<ul>
+						<li><a href="https://en.wikipedia.org/wiki/Linux">Linux</a></li>
+						<li><a href="https://en.wikipedia.org/wiki/Mac_OS_X">Mac OS X</a></li>
+						<li><a href="https://en.wikipedia.org/wiki/Microsoft_Windows">Microsoft Windows</a> 95/98/2000/2003/NT/XP/Vista/7/8/10/11</li>
+						<li>Most flavors of <a href="https://en.wikipedia.org/wiki/Unix">Unix</a></li>
+					</ul>
+				</section>
+				<section>
+					<h3>Platform Support (CRuby) (2/2)</h3>
+					<ul style="columns: 2;">
+						<li><a href="https://en.wikipedia.org/wiki/Acorn_Computers_Ltd">Acorn RISC OS</a></li>
+						<li><a href="https://en.wikipedia.org/wiki/Amiga">Amiga</a></li>
+						<li><a href="https://en.wikipedia.org/wiki/BeOS">BeOS</a> / <a href="https://en.wikipedia.org/wiki/Haiku_(operating_system)">Haiku</a></li>
+						<li><a href="https://en.wikipedia.org/wiki/DOS">DOS</a> (32-bit)</li>
+						<li><a href="https://en.wikipedia.org/wiki/IBM_i">IBM i</a></li>
+						<li><a href="https://en.wikipedia.org/wiki/Internet_Tablet_OS">Internet Tablet OS</a></li>
+						<li>Microsoft <a href="https://en.wikipedia.org/wiki/Windows_CE">Windows CE</a></li>
+						<li><a href="https://en.wikipedia.org/wiki/MorphOS">MorphOS</a></li>
+						<li><a href="https://en.wikipedia.org/wiki/OS/2">OS/2</a></li>
+						<li><a href="https://en.wikipedia.org/wiki/OpenVMS">OpenVMS</a></li>
+						<li><a href="https://en.wikipedia.org/wiki/Syllable_(operating_system)">Syllable</a></li>
+						<li><a href="https://en.wikipedia.org/wiki/Symbian_os">Symbian OS</a></li>
+						<li><a href="https://en.wikipedia.org/wiki/Blue_Gene/L">Blue Gene/L</a></li>
+					</ul>
+				</section>
+				<section>
+					<h3>(bad) JIT</h3>
+					<p class="fragment">Ruby is slow.</p>
+					<p class="fragment">They tried to make a JIT (MJIT).</p>
+					<p class="fragment">It's all right.</p>
+				</section>
+				<section>
+					<h3>(good) JIT</h3>
+					<div class="fragment">
+						<p>Shopify actually made progress.</p>
+						<p>
+							<a href="https://shopify.engineering/yjit-just-in-time-compiler-cruby">YJIT</a>
+							<a href="https://shopify.engineering/porting-yjit-ruby-compiler-to-rust"> (in Rust)</a>
+						</p>
+					</div>
+				</section>
+				<section>
+					<img src="https://cdn.shopify.com/s/files/1/0779/4361/files/YJITBarGraph_3d4b6747-fb61-48e0-ac48-67008b3deac3.png?format=webp&v=1634233279" alt="benchmark" style="background-color: #fff !important;">
+				</section>
+				<section>
+					<p>Now you're convinced!</p>
+					<p class="fragment">Let's learn Ruby!</p>
+				</section>
+				<section>
+					<h3>Installing Ruby</h3>
+					<h4>Linux</h4>
+					<pre class="fragment"><code>sudo apt-get install ruby-full</code></pre>
+					<pre class="fragment"><code>sudo dnf install ruby</code></pre>
+					<pre class="fragment"><code>sudo pacman -S ruby</code></pre>
+				</section>
+				<section>
+					<h3>Installing Ruby</h3>
+					<h4>macOS</h4>
+					<pre><code>
+						brew install ruby
+					</code></pre>
+					<p class="fragment">10 years later...</p>
+					<p class="fragment">The joke is that Homebrew is written in Ruby, hence it is <em>slow</em>.</p>
+				</section>
+				<section>
+					<h3>Installing Ruby</h3>
+					<h4>Windows</h4>
+					<a href="https://rubyinstaller.org/">https://rubyinstaller.org</a>
+				</section>
+				<section>
+					<h3>The Beginnings</h3>
+					<pre><code class="language-ruby">
+						$ "Hello World"
+						=> "Hello World"
+					</code></pre>
+				</section>
+				<section>
+					<h3>The Beginnings</h3>
+					<pre><code class="language-ruby">
+						$ puts "Hello World"
+						Hello World
+						=> nil
+					</code></pre>
+				</section>
+				<section>
+					<h3>The Beginnings</h3>
+					<pre><code class="language-ruby">
+						$ 3 + 2
+						=> 5
+					</code></pre>
+				</section>
+				<section>
+					<h3>The Beginnings</h3>
+					<pre><code class="language-ruby">
+						$ 3 * 2
+						=> 6
+					</code></pre>
+				</section>
+				<section>
+					<h3>The Beginnings</h3>
+					<pre><code class="language-ruby">
+						$ 3 ** 2
+						=> 9
+					</code></pre>
+				</section>
+				<section>
+					<h3>The Beginnings</h3>
+					<pre><code class="language-ruby">
+						$ Math.sqrt(9)
+						=> 3.0
+					</code></pre>
+				</section>
+				<section>
+					<h3>The Beginnings</h3>
+					<pre><code class="language-ruby">
+						$ a = 3 ** 2
+						=> 9
+						$ b = 4 ** 2
+						=> 16
+						$ Math.sqrt(a + b)
+						=> 5.0
+					</code></pre>
+				</section>
+				<section>
+					<h3>Methods</h3>
+					<pre><code class="language-ruby">
+						$ def hi
+						$     puts "Hello World!"
+						$ end
+						=> :hi
+					</code></pre>
+				</section>
+				<section>
+					<h3>Methods</h3>
+					<pre><code class="language-ruby">
+						$ hi
+						Hello World!
+						=> nil
+
+						$ hi()
+						Hello World!
+						=> nil
+					</code></pre>
+				</section>
+				<section>
+					<h3>Methods</h3>
+					<pre><code class="language-ruby">
+						$ def hi(name)
+						$     puts "Hello #{name}!"
+						$ end
+						=> :hi
+
+						$ hi("Ethan")
+						Hello Ethan!
+						=> nil
+					</code></pre>
+				</section>
+				<section>
+					<h3>Methods</h3>
+					<pre><code class="language-ruby">
+						$ def hi(name = "World")
+						$     puts "Hello #{name.capitalize}!"
+						$ end
+						=> :hi
+
+						$ hi "chris"
+						Hello Chris!
+						=> nil
+
+						$ hi
+						Hello World!
+						=> nil
+					</code></pre>
+				</section>
+				<section>
+					<h3>Classes</h3>
+					<pre><code class="language-ruby">
+						$ class Greeter
+						$     def initialize(name = "World")
+						$         @name = name
+						$     end
+						$     def say_hi
+						$         puts "Hi #{@name}!"
+						$     end
+						$     def say_bye
+						$         puts "Bye #{@name}, come back soon."
+						$     end
+						$ end
+						=> :say_bye
+					</code></pre>
+				</section>
+				<section>
+					<h3>Classes</h3>
+					<pre><code class="language-ruby">
+						$ greeter = Greeter.new("Pat")
+						=> #&lt;Greeter:0x16cac @name="Pat">
+
+						$ greeter.say_hi
+						Hi Pat!
+						=> nil
+
+						$ greeter.say_bye
+						Bye Pat, come back soon.
+						=> nil
+					</code></pre>
+				</section>
+				<section>
+					<h3>Classes</h3>
+					<pre><code class="language-ruby">
+						$ greeter.@name
+						=> SyntaxError: syntax error,
+							unexpected tIVAR, expecting '('
+					</code></pre>
+				</section>
+				<section>
+					<h3>Objects</h3>
+					<pre><code class="language-ruby">$ Greeter.instance_methods
+=> [:say_hi, :say_bye, :instance_of?, :public_send,
+	:instance_variable_get, :instance_variable_set,
+	:instance_variable_defined?, :remove_instance_variable,
+	:private_methods, :kind_of?, :instance_variables, :tap,
+	:is_a?, :extend, :define_singleton_method, :to_enum,
+	:enum_for, :<=>, :===, :=~, :!~, :eql?, :respond_to?,
+	:freeze, :inspect, :display, :send, :object_id, :to_s,
+	:method, :public_method, :singleton_method, :nil?, :hash,
+	:class, :singleton_class, :clone, :dup, :itself, :taint,
+	:tainted?, :untaint, :untrust, :trust, :untrusted?, :methods,
+	:protected_methods, :frozen?, :public_methods,
+	:singleton_methods, :!, :==, :!=, :__send__, :equal?,
+	:instance_eval, :instance_exec, :__id__]</code></pre>
+				</section>
+				<section>
+					<h3>Objects</h3>
+					<pre><code class="language-ruby">
+						$ Greeter.instance_methods(false)
+						=> [:say_hi, :say_bye]
+					</code></pre>
+				</section>
+				<section>
+					<h3>Objects</h3>
+					<pre><code class="language-ruby">
+						$ greeter.respond_to?("name")
+						=> false
+
+						$ greeter.respond_to?("say_hi")
+						=> true
+
+						$ greeter.respond_to?("to_s")
+						=> true
+					</code></pre>
+				</section>
+				<section>
+					<h3>Monkeypatching</h3>
+					<pre><code class="language-ruby">
+						$ class Greeter
+						$     attr_accessor :name
+						$ end
+						=> nil
+					</code></pre>
+				</section>
+				<section>
+					<h3>Monkeypatching</h3>
+					<pre><code class="language-ruby">
+						$ greeter = Greeter.new("Andy")
+						=> #&lt;Greeter:0x3c9b0 @name="Andy">
+						$ greeter.respond_to?("name")
+						=> true
+						$ greeter.respond_to?("name=")
+						=> true
+						$ greeter.name
+						=> "Andy"
+					</code></pre>
+				</section>
+				<section>
+					<h3>Monkeypatching</h3>
+					<pre><code class="language-ruby">
+						$ greeter.name = "Betty"
+						=> "Betty"
+						$ greeter
+						=> #<\Greeter:0x3c9b0 @name="Betty">
+						$ greeter.name
+						=> "Betty"
+					</code></pre>
+				</section>
+				<section>
+					<h3>MegaGreeter</h3>
+					<pre><code class="language-ruby">class MegaGreeter
+	attr_accessor :names
+
+	# Create the object
+	def initialize(names = "World")
+		@names = names
+	end
+
+	# Say hi to everybody
+	def say_hi
+		if @names.nil?
+			puts "..."
+		elsif @names.respond_to?("each")
+			# @names is a list of some kind, iterate!
+			@names.each do |name|
+				puts "Hello #{name}!"
+			end
+		else
+			puts "Hello #{@names}!"
+		end
+	end
+
+	# Say bye to everybody
+	def say_bye
+		if @names.nil?
+			puts "..."
+		elsif @names.respond_to?("join")
+			# Join the list elements with commas
+			puts "Goodbye #{@names.join(", ")}.  Come back soon!"
+		else
+			puts "Goodbye #{@names}.  Come back soon!"
+		end
+	end
+end
+
+
+if __FILE__ == $0
+	mg = MegaGreeter.new
+	mg.say_hi
+	mg.say_bye
+
+	# Change name to be "Zeke"
+	mg.names = "Zeke"
+	mg.say_hi
+	mg.say_bye
+
+	# Change the name to an array of names
+	mg.names = ["Albert", "Brenda", "Charles",
+				"Dave", "Engelbert"]
+	mg.say_hi
+	mg.say_bye
+
+	# Change to nil
+	mg.names = nil
+	mg.say_hi
+	mg.say_bye
+end</code></pre>
+				</section>
+				<section>
+					<h3>Iteration</h3>
+					<h5>Ruby</h5>
+					<pre><code class="language-ruby">@names.each do |name|
+	puts "Hello #{name}!"
+end</code></pre>
+					<h5>C</h5>
+					<pre><code class="language-c">for (int i = 0; i < number_of_elements; i++)
+{
+	do_something_with(element[i]);
+}</code></pre>
+				</section>
+				<section>
+					<h3>Ducktyping (reflection)</h3>
+					<pre><code class="language-ruby"># Say bye to everybody
+def say_bye
+	if @names.nil?
+		puts "..."
+	elsif @names.respond_to?("join")
+		# Join the list elements with commas
+		puts "Goodbye #{@names.join(", ")}.  Come back soon!"
+	else
+		puts "Goodbye #{@names}.  Come back soon!"
+	end
+end</code></pre>
+				</section>
+				<section>
+					<h3>Not Executing Immediately</h3>
+					<h5>Ruby</h5>
+					<pre><code class="language-ruby">if __FILE__ == $0</code></pre>
+					<h5>Python</h5>
+					<pre><code class="language-python">if __name__ == "__main__":</code></pre>
+				</section>
+				<section>
+					<h3>Consider Yourself Introduced!</h3>
+					<h3 class="fragment">Now you're ready for Rails</h3>
+				</section>
+				<section>
+					<img class="r-stretch" src="https://i.imgur.com/0GitAzu.png" alt="files">
+				</section>
+				<section>
+					<img src="https://i.imgur.com/aLuJLwO.png" alt="files">
+				</section>
+				<section>
+					<img class="r-stretch" src="https://i.imgur.com/06HzDzx.png" alt="files">
+				</section>
+				<section>
+					<h3>Templates</h3>
+					<pre><code class="language-html">&lt;h1>Articles&lt;/h1>
+
+&lt;ul>
+  <% @articles.each do |article| %>
+    &lt;li>
+      <%= article.title %>
+    &lt;/li>
+  <% end %>
+&lt;/ul></code></pre>
+				</section>
+				<section>
+					<h3>Controller</h3>
+					<pre><code class="language-ruby">class ArticlesController < ApplicationController
+  def index
+    @articles = Article.all
+  end
+
+  def show
+    @article = Article.find(params[:id])
+  end
+
+  def new
+    @article = Article.new
+  end
+
+  def create
+    @article = Article.new(title: "...", body: "...")
+
+    if @article.save
+      redirect_to @article
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+end</code></pre>
+				</section>
+				<section>
+					<h3>Models</h3>
+					<pre><code class="language-ruby">class Comment < ApplicationRecord
+  belongs_to :article
+end</code></pre>
+				</section>
+				<section>
+					<h3>Database Migrations</h3>
+					<pre><code class="language-ruby">class CreateComments < ActiveRecord::Migration[7.0]
+  def change
+    create_table :comments do |t|
+      t.string :commenter
+      t.text :body
+      t.references :article, null: false, foreign_key: true
+
+      t.timestamps
+    end
+  end
+end</code></pre>
+				</section>
+				<section>
+					<h3>That's all!</h3>
+					<h3>Thanks everyone</h3>
+				</section>
+
+
+
+
+
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+				controls: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealHighlight ],
+			});
+
+			// Let mouse buttons go forward and backwards
+			window.addEventListener("mousedown", handleClick, false);
+			window.addEventListener("contextmenu", function(e) { e.preventDefault(); }, false);
+
+			function handleClick(e) {
+				e.preventDefault();
+				if(e.button === 0) Reveal.next();
+				if(e.button === 2) Reveal.prev();
+			}
+		</script>
+	</body>
+</html>
