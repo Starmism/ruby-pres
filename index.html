@@ -823,20 +823,11 @@ end</code></pre>
 			Reveal.initialize({
 				hash: true,
 				controls: true,
+				mouseWheel: true,
 
 				// Learn about plugins: https://revealjs.com/plugins/
 				plugins: [ RevealHighlight ],
 			});
-
-			// Let mouse buttons go forward and backwards
-			window.addEventListener("mousedown", handleClick, false);
-			window.addEventListener("contextmenu", function(e) { e.preventDefault(); }, false);
-
-			function handleClick(e) {
-				e.preventDefault();
-				if(e.button === 0) Reveal.next();
-				if(e.button === 2) Reveal.prev();
-			}
 		</script>
 	</body>
 </html>
